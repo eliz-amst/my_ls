@@ -66,6 +66,7 @@ Tips
 Check /dev What is the difference between stat and lstat?
 
 # Tests to pass
+```
 Test 1: ./my_ls
 MY LS CAN YOU RUN  /MY LS AND IT PRINTS THE CONTENT OF THE CURRENT DIRECTORY?
 Test 2: ./my_ls .
@@ -82,4 +83,4 @@ Test 7: ./my_ls DIR1 DIR2
 MY LS CAN YOU RUN  /MY LS DIR1 DIR2 AND IT PRINTS THE CONTENT OF THE TWO DIRECTORIES? 
 Test 8: ./my_ls -t -a 
 MY LS CAN YOU RUN  /MY LS -T -A AND IT PRINTS THE CONTENT OF THE MARVEL DIRECTORY (SORTED BY TIME SEC + NSEC + ALPHANUM ) + HIDDEN FILES?
-
+```
