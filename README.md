@@ -1,6 +1,6 @@
 # my_ls
 
-Submit directory	.
+Submit directory	. 
 Submit files	Makefile - *.c - *.h
 
 Description
