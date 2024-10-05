@@ -48,7 +48,7 @@ readdir(2)
 
 You can NOT use:
 Any functions / syscalls which does not appear in the previous list
-Yes, it includes exit
+Yes, it includes exit, errno, qsort, strdup, snprintf, strrchr, perror, realloc, and getopt.
 Multiline macros are forbidden
 Include another .c is forbidden
 Macros with logic (while/if/variables/...) are forbidden
@@ -62,3 +62,22 @@ $>
 ```
 Tips
 Check /dev What is the difference between stat and lstat?
+
+# Tests to pass
+Test 1: ./my_ls
+MY LS CAN YOU RUN  /MY LS AND IT PRINTS THE CONTENT OF THE CURRENT DIRECTORY?
+Test 2: ./my_ls .
+ MY LS CAN YOU RUN  /MY LS . AND IT PRINTS THE CONTENT OF THE CURRENT DIRECTORY?
+Test 3: ./my_ls /tmp/
+MY LS CAN YOU RUN  /MY LS /TMP/ AND IT PRINTS THE CONTENT OF THE DIRECTORY? 
+Test 4: ./my_ls -t
+MY LS CAN YOU RUN  /MY LS -T AND IT PRINTS THE CONTENT OF THE CURRENT DIRECTORY (SORTED BY TIME)? 
+Test 5: ./my_ls -a
+MY LS CAN YOU RUN  /MY LS -A AND IT PRINTS THE CONTENT OFTHE CURRENT DIRECTORY WITH . FILES?   
+Test 6: ./my_ls -ta
+MY LS CAN YOU RUN  /MY LS -TA AND IT PRINTS THE CONTENT OF THE MARVEL DIRECTORY (SORTED BY TIME) + HIDDEN FILES? 
+Test 7: ./my_ls DIR1 DIR2
+MY LS CAN YOU RUN  /MY LS DIR1 DIR2 AND IT PRINTS THE CONTENT OF THE TWO DIRECTORIES? 
+Test 8: ./my_ls -t -a 
+MY LS CAN YOU RUN  /MY LS -T -A AND IT PRINTS THE CONTENT OF THE MARVEL DIRECTORY (SORTED BY TIME SEC + NSEC + ALPHANUM ) + HIDDEN FILES?
+
