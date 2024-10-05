@@ -4,7 +4,7 @@ Submit directory	.
 Submit files	Makefile - *.c - *.h
 
 Description
-Write a programm called my_ls. Following the specifications of this man page.
+Write a programm called my_ls. Following the specifications of this page.
 
 SPECIFICATIONS
 NAME
@@ -21,9 +21,10 @@ associated information.
 If no operands are given, the contents of the current directory are displayed. If more than one operand is given, non-directory operands are displayed first; directory and non-directory operands are sorted separately and in lexicographical order.
 
 The following options are available:
-
+```
 -a Include directory entries whose names begin with a dot (.).
 -t Sort by time modified (most recently modified first) before sorting the operands by lexicographical order.
+```
 
 # Requirements
 Your code must be compiled with the flags -Wall -Wextra -Werror.
