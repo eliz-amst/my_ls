@@ -86,4 +86,9 @@ Test 8: ./my_ls -t -a
 MY LS CAN YOU RUN  /MY LS -T -A AND IT PRINTS THE CONTENT OF THE MARVEL DIRECTORY (SORTED BY TIME SEC + NSEC + ALPHANUM ) + HIDDEN FILES?
 ```
 
-currently the code fails ./my_ls -t -a , ./my_ls -ta, ./my_ls DIR1 DIR2
+currently the code fails this commands
+```
+./my_ls -t -a 
+./my_ls -ta
+./my_ls DIR1 DIR2
+```
