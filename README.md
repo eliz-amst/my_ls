@@ -1,13 +1,12 @@
 # my_ls
-My Ls
 
-My Ls	
 Submit directory	.
 Submit files	Makefile - *.c - *.h
+
 Description
-SPECIFICATIONS
 Write a programm called my_ls. Following the specifications of this man page.
 
+SPECIFICATIONS
 NAME
 my_ls -- list directory contents
 
