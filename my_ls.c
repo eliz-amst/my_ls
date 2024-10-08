@@ -1,9 +1,28 @@
 #include "my_ls.h"
 
+int my_strcmp(const char *a, const char *b)
+{
+    while (*a && *a == *b) { ++a; ++b; }
+    return (int)(unsigned char)(*a) - (int)(unsigned char)(*b);
+}
+
+void sort_name(struct dirent *entries[], int count) {
+    for (int i = 1; i < count; i++) {
+        struct dirent * key = entries[i];
+        int j = i - 1;
+
+        while (j >= 0 && my_strcmp(entries[j]->d_name, key ->d_name) > 0) {
+            entries[j + 1] = entries[j];
+            j--;
+        }
+        entries[j + 1] = key;
+    }
+}
+
 int list_dir(const char *dir_name, int op_a, int op_t){
    DIR *dir;
    struct dirent *entry; 
-   struct dirent entries[MAX_ENTRIES];  
+   struct dirent *entries[MAX_ENTRIES];  
    int count = 0;
 
     dir = opendir(dir_name);
@@ -17,18 +36,21 @@ int list_dir(const char *dir_name, int op_a, int op_t){
             continue;
         }
         if (count < MAX_ENTRIES) {
-            entries[count++] = *entry;  
+            entries[count++] = entry;  
         }
     }
+    closedir(dir);
+
     if(op_t){
         printf("option T\n");
+    } else {
+        sort_name(entries, count);
     }
     
     for (int i = 0; i < count; i++) {
-        printf("%s\n", entries[i].d_name);
+        printf("%s\n", entries[i]->d_name);
     }
 
-    closedir(dir);
     return 0;
 }
 
