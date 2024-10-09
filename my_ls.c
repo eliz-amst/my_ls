@@ -2,9 +2,13 @@
 
 int my_strcmp(const char *a, const char *b)
 {
-    while (*a && *a == *b) { ++a; ++b; }
-    return (int)(unsigned char)(*a) - (int)(unsigned char)(*b);
+    while (*a && *b && *a == *b) {
+        a++;
+        b++;
+    }
+    return *a - *b;
 }
+
 
 void sort_name(struct dirent *entries[], int count) {
     for (int i = 1; i < count; i++) {
