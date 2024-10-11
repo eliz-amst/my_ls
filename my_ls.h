@@ -8,10 +8,13 @@
 #include <string.h>
 #include <time.h>
 
-#define EXIT_FAILURE 1
 #define MAX_ENTRIES 1000
 
+size_t my_strlen(const char *str);
 int my_strcmp(const char *a, const char *b);
+void swap(char **a, char **b);
+void my_strcpy(char *dest, const char *src);
+void my_strcat(char *dest, const char *src);
 void copy_dirent(struct dirent *dest, const struct dirent *src);
 void sort_name(struct dirent *entries[], int count);
 void sort_time(struct dirent *entries[], struct timespec *times, int count);
