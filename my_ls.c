@@ -1,4 +1,12 @@
 #include "my_ls.h"
+// custom strlen
+size_t my_strlen(const char *str) {
+    size_t length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
+}
 // Custom string comparison function (replaces strcmp)
 int my_strcmp(const char *a, const char *b) {
     while (*a && *b && *a == *b) {
@@ -6,6 +14,34 @@ int my_strcmp(const char *a, const char *b) {
         b++;
     }
     return *a - *b;
+}
+void swap(char **a, char **b) {
+    char *temp = *a;
+    *a = *b;
+    *b = temp;
+}
+// Custom string copy function
+void my_strcpy(char *dest, const char *src) {
+    while (*src) {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';  // Null-terminate the string
+}
+// Custom string concatenation function
+void my_strcat(char *dest, const char *src) {
+    // Move `dest` pointer to the end of the existing string
+    while (*dest) {
+        dest++;
+    }
+    // Copy the `src` string to `dest`
+    while (*src) {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';  // Null-terminate the string
 }
 // Custom function to copy dirent struct
 void copy_dirent(struct dirent *dest, const struct dirent *src) {
@@ -39,7 +75,7 @@ void sort_time(struct dirent *entries[], struct timespec *times, int count) {
         struct timespec key_time = times[i];
         int j = i - 1;
         // Compare by tv_sec first, then by tv_nsec for finer granularity
-        while (j >= 0 && (times[j].tv_sec < key_time.tv_sec || 
+        while (j >= 0 && (times[j].tv_sec < key_time.tv_sec ||
                 (times[j].tv_sec == key_time.tv_sec && times[j].tv_nsec < key_time.tv_nsec))) {
             entries[j + 1] = entries[j];
             times[j + 1] = times[j];
@@ -69,14 +105,22 @@ int list_dir(const char *dir_name, int op_a, int op_t) {
             // Allocate memory for each entry and copy the dirent data
             entries[count] = malloc(sizeof(struct dirent));
             if (entries[count] == NULL) {
-                perror("malloc");
+                printf("malloc failed\n");
                 closedir(dir);
                 return 1;
             }
             copy_dirent(entries[count], entry);
             // Get the file's stat info to retrieve modification time
-            char filepath[NAME_MAX + 256];
-            snprintf(filepath, sizeof(filepath), "%s/%s", dir_name, entry->d_name);
+            int filepath_len = my_strlen(dir_name) + my_strlen(entry->d_name) + 2;
+            char *filepath = malloc(filepath_len);  // Allocate space for dir_name + "/" + entry->d_name + '\0'
+            if (!filepath) {
+                printf("malloc failed\n");
+                closedir(dir);
+                return 1;
+            }
+            my_strcpy(filepath, dir_name);
+            my_strcat(filepath, "/");
+            my_strcat(filepath, entry->d_name);
             if (stat(filepath, &file_stat) == 0) {
                 times[count] = file_stat.st_mtim; // Store modification time
             } else {
@@ -84,6 +128,7 @@ int list_dir(const char *dir_name, int op_a, int op_t) {
                 times[count].tv_sec = 0;
                 times[count].tv_nsec = 0;
             }
+            free(filepath);  // Free the allocated memory for filepath
             count++;
         }
     }
@@ -126,16 +171,24 @@ int main(int argc, char **argv) {
     if (dir_count == 0) {
         directories[dir_count++] = ".";  // Default to current directory
     }
+    // Sort directories if there are multiple
+    if (dir_count > 1) {
+        for (int i = 0; i < dir_count - 1; i++) {
+            for (int j = 0; j < dir_count - i - 1; j++) {
+                if (my_strcmp(directories[j], directories[j + 1]) > 0) {
+                    swap(&directories[j], &directories[j + 1]);
+                }
+            }
+        }
+    }
     // List each directory specified
     for (int i = 0; i < dir_count; i++) {
-    if(dir_count>1)
-    {
-    if(i!=0)
-    {
-    printf("\n");
-    }
-    printf("%s:\n",directories[i]);
-    }
+        if (i != 0) {
+            printf("\n");
+        }
+        if (dir_count > 1) {
+            printf("%s:\n", directories[i]);
+        }
         list_dir(directories[i], op_a, op_t);
     }
     return 0;
