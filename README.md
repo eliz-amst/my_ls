@@ -1,4 +1,4 @@
-# my_ls
+# ls command implementation in c
 SYNOPSIS
 my_ls [-at] [file ...]
 
