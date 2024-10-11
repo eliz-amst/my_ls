@@ -1,19 +1,9 @@
 # my_ls
-
-Submit directory	. 
-Submit files	Makefile - *.c - *.h
-
-Description
-Write a programm called my_ls. Following the specifications of this page.
-
-SPECIFICATIONS
-NAME
-my_ls -- list directory contents
-
 SYNOPSIS
 my_ls [-at] [file ...]
 
 # DESCRIPTION
+Write a programm called my_ls. Following the specifications:
 For each operand that names a file of a type other than directory, my_ls displays its name as well as any requested, associated information. 
 For each operand that names a file of type directory, my_ls displays the names of files contained within that directory, as well as any requested, 
 associated information.
@@ -63,8 +53,6 @@ $>ls -1 > ls.output
 $>diff my_ls.output ls.output
 $>
 ```
-Tips
-Check /dev What is the difference between stat and lstat?
 
 # Tests to pass
 ```
@@ -85,10 +73,6 @@ MY LS CAN YOU RUN  /MY LS DIR1 DIR2 AND IT PRINTS THE CONTENT OF THE TWO DIRECTO
 Test 8: ./my_ls -t -a 
 MY LS CAN YOU RUN  /MY LS -T -A AND IT PRINTS THE CONTENT OF THE MARVEL DIRECTORY (SORTED BY TIME SEC + NSEC + ALPHANUM ) + HIDDEN FILES?
 ```
-
-currently the code that passes commands
-```
-Test 1: ./my_ls
 MY LS CAN YOU RUN  /MY LS AND IT PRINTS THE CONTENT OF THE CURRENT DIRECTORY?
 Test 2: ./my_ls .
  MY LS CAN YOU RUN  /MY LS . AND IT PRINTS THE CONTENT OF THE CURRENT DIRECTORY?
